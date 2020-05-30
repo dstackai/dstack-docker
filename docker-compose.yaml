@@ -1,0 +1,19 @@
+version: '3'
+services:
+  mail:
+    image: bytemark/smtp
+    restart: always
+  dstack:
+    image: "dstackai/dstack:latest"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/data
+    environment:
+      - dstackai_port=8080
+      - dstackai_smtp_host=mail
+      - dstackai_smtp_port=25
+      - dstackai_smtp_user=foo
+      - dstackai_smtp_password=bar
+      - dstackai_smtp_starttls=true
+      - dstackai_smtp_from=noreply@dstack.ai
